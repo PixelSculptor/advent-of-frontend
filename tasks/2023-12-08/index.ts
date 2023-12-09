@@ -33,6 +33,7 @@ export class CountryStrategy extends Strategy {
   }
 }
 
+
 export type Letter = {
   content: string;
   country: 'pl' | 'de' | 'us';
