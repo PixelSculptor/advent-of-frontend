@@ -1,10 +1,10 @@
 // Tutaj skopiuj testy dla zadania. Uruchom je poleceniem `npm test`
-import { Equipment } from './index';
+import { Equipment, Tool } from './index';
 
 describe('Equipment Tests', () => {
   test('Equipment initializes, updates, and disposes tools correctly', () => {
     const eq = new Equipment();
-    const mockTool = { init: jest.fn(), update: jest.fn(), dispose: jest.fn() };
+    const mockTool: Tool = { init: jest.fn(), update: jest.fn(), dispose: jest.fn() };
     eq.registerTools(mockTool);
     eq.initializeTools();
     eq.updateTools();
