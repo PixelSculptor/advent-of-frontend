@@ -15,7 +15,6 @@ type City = {
 type QueueToCheck = City[];
 
 export function findShortestPath(graph: WeightedGraph, startNode: AVAILABLE_CITIES, endNode: AVAILABLE_CITIES): string[] | null {
-    // return []
     if(!isCityOnMap(graph, startNode, endNode)) throw new Error('Invalid or non-existent route');
     if(!checkConnections(graph, startNode, endNode)){
         return null;
@@ -25,7 +24,6 @@ export function findShortestPath(graph: WeightedGraph, startNode: AVAILABLE_CITI
 
     const citiesQueue =  dijkstra(graph, rawCitiesData);
     
-
     return getPath(citiesQueue,endNode);
 }
 
@@ -41,7 +39,7 @@ function dijkstra(graph: WeightedGraph, citiesToCheck: QueueToCheck): QueueToChe
         const cityToTraverse = getTheCheapestCityToCheck(citiesToCheck);
         for(const [cityToCheck, distance] of Object.entries(graph[cityToTraverse.city])){
             const cityToMeasure = citiesToCheck.find((city) => city.city === cityToCheck);
-            if(!cityToMeasure) throw Error('there is no city in queue');
+            if(!cityToMeasure) throw Error('There is no city in queue');
             const {distanceToCity} = cityToMeasure
             if(!cityToMeasure.checked && distance < distanceToCity){
                 citiesToCheck.map((city) => {
@@ -107,7 +105,5 @@ function getPath(cities: QueueToCheck, endNode: AVAILABLE_CITIES): AVAILABLE_CIT
 
         }while(nextCity?.previousCity !== '');
     }
-   
-
    return path.reverse();
 }
