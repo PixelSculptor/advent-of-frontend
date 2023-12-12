@@ -35,12 +35,16 @@ function isCityOnMap(grpah: WeightedGraph, startNode: AVAILABLE_CITIES, endNode:
 
 function dijkstra(graph: WeightedGraph, citiesToCheck: QueueToCheck): QueueToCheck{
     
-    do{
+    do {
         const cityToTraverse = getTheCheapestCityToCheck(citiesToCheck);
+
         for(const [cityToCheck, distance] of Object.entries(graph[cityToTraverse.city])){
             const cityToMeasure = citiesToCheck.find((city) => city.city === cityToCheck);
+
             if(!cityToMeasure) throw Error('There is no city in queue');
-            const {distanceToCity} = cityToMeasure
+
+            const { distanceToCity } = cityToMeasure
+            
             if(!cityToMeasure.checked && distance < distanceToCity){
                 citiesToCheck.map((city) => {
                     if(city.city === cityToCheck){
