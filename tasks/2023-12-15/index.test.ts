@@ -1,4 +1,6 @@
 // Tutaj skopiuj testy dla zadania. Uruchom je poleceniem `npm test`
+import { storageQuery, storageResolver } from ".";
+
 test('Generates storage sections for hats', () => {
     const generator = storageQuery(20, 'hat', storageResolver);
     const sections = Array.from(generator);

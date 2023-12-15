@@ -1,8 +1,10 @@
 // Tutaj skopiuj kod zadania
 export function* storageQuery(range: number, gift: string, resolver: (n: number, gift: string) => boolean): Generator<number> {
-    throw new Error('Not implemented');
+    for(let i=gift.length; i<=range; i++){
+        if(resolver(i,gift)) yield i;
+    }
 }
 
 export function storageResolver(n: number, gift: string): boolean {
-    return false;
+    return n % gift.length === 0;
 }
