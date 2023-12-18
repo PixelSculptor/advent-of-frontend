@@ -24,7 +24,6 @@ export class RateLimiter implements IRateLimiter{
             clearTimeout(this.allowedRequestInterval as NodeJS.Timeout);
             return false;
         }
-        console.log('interval: ', this.allowedRequestInterval, 'curremntAccess: ', this.currentRequestNumber);
         if(!this.allowedRequestInterval){
             this.allowedRequestInterval = setTimeout(this.resetRequests, this.intervalMs);
         }
