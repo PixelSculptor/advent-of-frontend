@@ -11,13 +11,12 @@ export function usePagination<T>(items: T[], itemsPerPage: number, pageNumber: n
         currentPageItems = divIntoChunks(items, itemsPerPage)[pageNumber-1];
     }
 
-
     return { totalPages, currentPageItems, totalItems }
 }
 
 function divIntoChunks<T>(array: T[], chunkFactor: number): T[][]{
     let chunks = [];
-    for(let i = 0; i<array.length; i += chunkFactor){
+    for(let i = 0; i < array.length; i += chunkFactor){
         chunks.push(array.slice(i, i+chunkFactor));
     }
     return chunks;
