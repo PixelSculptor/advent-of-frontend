@@ -24,6 +24,9 @@ daysToGenerate.forEach((day) => {
     const indexFilePath = path.join(folderPath, 'index.ts');
     fs.writeFileSync(indexFilePath, '// Tutaj skopiuj kod zadania');
 
+    const mannual = path.join(folderPath, 'mannual.md');
+    fs.writeFileSync(mannual, 'Treść zadania:');
+
     const testFilePath = path.join(folderPath, 'index.test.ts');
     fs.writeFileSync(
       testFilePath,
