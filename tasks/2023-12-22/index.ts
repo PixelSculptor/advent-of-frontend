@@ -74,17 +74,10 @@ export class MarkdownToHtmlPlugin implements IPlugin {
         // Convert lists
         trimmedText = trimmedText.replace(/^\*\s(.+)$/gm, '<li>$1</li>');
         trimmedText = trimmedText.replace(/(<li>.+<\/li>)/g, '<ul>$1</ul>');
-      
+        
         // Convert **word** to <strong>word</strong>
         trimmedText = trimmedText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
       
         return trimmedText;
     };
-}
-
-function divideText(text: string){
-    const transformedText = text.split(' ').map(word => {
-        if(word.includes('.')) return [...word.split('.'),'.'];
-        return word;
-    });
 }
