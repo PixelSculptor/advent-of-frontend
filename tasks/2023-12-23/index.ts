@@ -8,40 +8,29 @@ export type JsonSchema = {
   };
   
   export const generateSchema = (schemaDefinition: JsonSchema): JsonSchema => {
-    // const {type, required} = schemaDefinition
-    // const schema: JsonSchema = {type};
-    // if(schemaDefinition.type === 'object' && schemaDefinition.properties){
-
-    //     const { properties } = schemaDefinition;
-
-    //     const generateProperties: Record<string, JsonSchema> = {};
-    //     for(const [key, value] of Object.entries(properties)){
-    //         generateProperties[key] = generateSchema(value);
-    //     }
-    //     const schema: JsonSchema = {type};
-
-    //     schema.properties = {...generateProperties};
-
-
-    //     if(required?.length){
-    //         schema.required = required;
-    //     }
-    //     return schema;
-    // }else if(type === 'array'){
-    //     const {items, nullable} = schemaDefinition;
-    //     const schemaItems = items ? generateSchema(items) : {};
-    //     schema.items = {
-    //         type: 'array',
-    //         items: { type: typeof schemaItems[0]}
-    //     }
-    // }
     return schemaDefinition;
   };
   
-  export const validate = (schema: JsonSchema, jsonObject: any): boolean => {
-    const requiredProperties = Object.keys(jsonObject);
-    if(!schema.required?.every(reqProp => requiredProperties.includes(reqProp))) return false;
-    
-    return true;
-    
-};
+ export const validate = (schema: JsonSchema, jsonObject: any): boolean => {
+      if(schema.type !== typeof jsonObject) return false;
+      if(schema.properties){
+          const {properties} = schema;
+          for(const [key, value] of Object.entries(properties)){
+              if(key in jsonObject){
+                  if(value.type === 'array'){
+                      if(value.nullable){
+                          return jsonObject[key].every((item: unknown) => typeof item === value.type || item === null);
+                      }
+                  }
+                  if(value.nullable){
+                      return (typeof jsonObject[key] === value.type || jsonObject[key] === null);
+                  }
+              }
+          }
+      }
+      const requiredProperties = Object.keys(jsonObject);
+      if(!schema.required?.every(reqProp => requiredProperties.includes(reqProp))) return false;
+      
+      return true;
+      
+  };
